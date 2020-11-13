@@ -39,13 +39,12 @@ const TeacherHandler = {
         if (!slots) {
             throw new Error('no se han podido detectar los slots');
         }
-        console.log(slots);
         var nombre = slots.nombre;
         var bundle = {
             'speechWaiting': 'Voy a mirar en los archivos.',
             'name': nombre,
         }
-        console.log(handlerInput);
+
         try {
             await callDirectiveService(bundle.speechWaiting, handlerInput);
         } catch (err) {
@@ -79,7 +78,6 @@ const HorariosHandler = {
         if (!slots) {
             throw new Error('no se han podido detectar los slots');
         }
-        console.log(slots);
         var grado = slots.grado;
         var profesor = slots.profesor;
         var bundle = {
@@ -87,7 +85,6 @@ const HorariosHandler = {
             'grado': grado,
             'profesor': profesor,
         }
-        console.log(handlerInput);
         try {
             await callDirectiveService(bundle.speechWaiting, handlerInput);
         } catch (err) {
@@ -96,7 +93,6 @@ const HorariosHandler = {
         }
         try {
             const responseText = await subIndex.executeHorarios(bundle);
-            console.log('test')
             return handlerInput.responseBuilder
                 .speak(responseText)
                 .withSimpleCard('Resultados', responseText)
@@ -229,7 +225,7 @@ const ErrorHandler = {
         return true;
     },
     handle(handlerInput, error) {
-        const speakOutput = 'Lo siento, he tenido problemas intentando hacer lo que me has pedido. Por favor intentelo de nuevo.';
+        const speakOutput = 'Lo siento, he tenido problemas intentando hacer lo que me has pedido. Por favor inténtelo de nuevo.';
         console.log(`~~~~ Error handled: ${JSON.stringify(error)}`);
 
         return handlerInput.responseBuilder
