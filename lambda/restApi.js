@@ -3,7 +3,6 @@ const https = require('https');
 
 function getName(name, path, callback){
     return new Promise(((resolve, reject) => {
-        console.log("Este es el nombre que se va a buscar: "+name);
         var get_data = '';
         
         var headers = {
@@ -56,7 +55,7 @@ function getName(name, path, callback){
 
 
 function getWebPage(path, callback){
-    console.log(path);
+    //console.log(path);
     return new Promise(((resolve, reject) => {
         var get_data = '';
         
@@ -91,7 +90,6 @@ function getWebPage(path, callback){
                 // Correct authentication
                 if (res.statusCode === 200) {
 //                    console.log(responseString);
-                    console.log("hemos llegado bien");
                     resolve(callback(null, responseString));
                 }
                 // Unknown error
