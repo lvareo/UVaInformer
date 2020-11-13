@@ -10,7 +10,6 @@ exports.executeTeacher = function (bundle) {
                 return error;
             }
             console.log("Name info retrieved succesfully.");
-            console.log(JSON.stringify(data));
             let text = '';
             let card = '';
             switch(data.length){
@@ -53,19 +52,30 @@ exports.executeHorarios = function (bundle) {
             }
             let dataSplit = data.split("\n");
             let gradoLine = textUtils.searchStringInArray(bundle.grado, dataSplit);
+            let text = '';
+            if(gradoLine === -1){
+                text = 'No he podido encontrar el grado '+bundle.grado+'. Por favor inténtelo de nuevo.';
+                return text;
+            }
             console.log("Career path retrieved succesfully.");
-            console.log(dataSplit[gradoLine]);
             let pathGrado = dataSplit[gradoLine].split("\"")[1]
             return rest.getWebPage(pathGrado, function(error, data){
                 let dataSplit = data.split("\n");
                 let tablaLine = textUtils.searchStringInArray("tutorias.htm", dataSplit);
                 let tablaPath = dataSplit[tablaLine].split("\"")[3]
                 return rest.getWebPage(tablaPath, function(error, data){
+                    if(error){
+                        console.log(error);
+                        return error;
+                    }
                     let timeTableArray = textUtils.extractTimeTables(data, bundle.profesor);
-                    console.log(timeTableArray);
+                    let text = '';
+                    if (timeTableArray === -1){
+                        text = 'No he podido encontrar a '+bundle.profesor+' del grado en '+bundle.grado+'. Por favor inténtelo de nuevo.';
+                        return text;
+                    }
                     let timeTable = textUtils.timeTableJSON(timeTableArray);
-                    console.log(timeTable);
-                    var text = 'El horario de tutorías para '+bundle.profesor+' es ';
+                    text = 'El horario de tutorías para '+bundle.profesor+' es ';
                     var today = new Date();
                     var limit = new Date('2021-02-15');
                     for (let j=timeTable.length-1;j>=0;j--){
