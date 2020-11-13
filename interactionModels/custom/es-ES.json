@@ -1,0 +1,178 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "uva informer",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "HelloWorldIntent",
+          "slots": [],
+          "samples": [
+            "hola",
+            "como estás",
+            "di hola mundo",
+            "di hola",
+            "hola mundo"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "teacher",
+          "slots": [
+            {
+              "name": "nombre",
+              "type": "AMAZON.SearchQuery",
+              "samples": [
+                "Quiero la información de {nombre}",
+                "Estoy buscando a {nombre}",
+                "{nombre}",
+                "A {nombre}"
+              ]
+            }
+          ],
+          "samples": [
+            "datos sobre {nombre}",
+            "quiero la información de {nombre}",
+            "dame la información de {nombre}",
+            "información sobre profesores",
+            "profesor",
+            "profesores",
+            "la información de {nombre}"
+          ]
+        },
+        {
+          "name": "horarios",
+          "slots": [
+            {
+              "name": "grado",
+              "type": "AMAZON.SearchQuery",
+              "samples": [
+                "para el grado en {grado}",
+                "{grado}",
+                "de {grado}",
+                "para {grado}"
+              ]
+            },
+            {
+              "name": "profesor",
+              "type": "AMAZON.SearchQuery",
+              "samples": [
+                "De {profesor}",
+                "{profesor}",
+                "Para {profesor}"
+              ]
+            }
+          ],
+          "samples": [
+            "el horario de tutorias de {profesor}",
+            "tutorias",
+            "horarios",
+            "qué horario de tutorias tiene {profesor}",
+            "el horario de tutorias",
+            "dame el horario de tutorias"
+          ]
+        }
+      ],
+      "types": []
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "horarios",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "grado",
+              "type": "AMAZON.SearchQuery",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1311390571898.826669157522"
+              }
+            },
+            {
+              "name": "profesor",
+              "type": "AMAZON.SearchQuery",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1311390571898.1320629336036"
+              }
+            }
+          ],
+          "delegationStrategy": "ALWAYS"
+        },
+        {
+          "name": "teacher",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "nombre",
+              "type": "AMAZON.SearchQuery",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1424001673192.1174632056627"
+              }
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.1311390571898.826669157522",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿De qué grado necesitas la información?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿para qué grado estás buscando información?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1311390571898.1320629336036",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿Para qué profesor estás buscando la información?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1424001673192.1174632056627",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿De qué profesor quieres saber la información?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿Qué profesor estamos buscando?"
+          }
+        ]
+      }
+    ]
+  },
+  "version": "13"
+}
