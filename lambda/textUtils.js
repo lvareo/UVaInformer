@@ -15,10 +15,7 @@ function searchStringInArray (str, strArray) {
 
 function checkName(rawName){
     var output = '';
-    console.log(rawName);
     var completeName = encodeURIComponent(rawName).split('%20');
-    console.log(completeName);
-    console.log(completeName[0]);
     switch(completeName.length){
         case 0:
             break;
@@ -81,6 +78,9 @@ function extractTimeTables(webPage, profesor){
     let textByTeacher = webPage.split('<span style="font-family: Arial; color: #000000; font-size: 14px; line-height: 1; *line-height: normal; font-weight: bold;">');
     textByTeacher.shift();
     let timeTableLine = searchStringInArray(profesorNormalized, textByTeacher);
+    if (timeTableLine === -1){
+        return -1;
+    } 
     let timeTableText = textByTeacher[timeTableLine].split("\n");
     for(var i in timeTableText){
         if(timeTableText[i].match('<span style="font-family: \'DejaVu Sans\', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.215332;">')){
