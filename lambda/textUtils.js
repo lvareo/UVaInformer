@@ -77,9 +77,10 @@ function checkName(rawName){
 
 function extractTimeTables(webPage, profesor){
     var timeTable = [];
+    var profesorNormalized = profesor.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     let textByTeacher = webPage.split('<span style="font-family: Arial; color: #000000; font-size: 14px; line-height: 1; *line-height: normal; font-weight: bold;">');
     textByTeacher.shift();
-    let timeTableLine = searchStringInArray(profesor, textByTeacher);
+    let timeTableLine = searchStringInArray(profesorNormalized, textByTeacher);
     let timeTableText = textByTeacher[timeTableLine].split("\n");
     for(var i in timeTableText){
         if(timeTableText[i].match('<span style="font-family: \'DejaVu Sans\', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.215332;">')){
