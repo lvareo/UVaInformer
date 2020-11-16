@@ -46,7 +46,7 @@ const TeacherHandler = {
         }
 
         try {
-            await callDirectiveService(bundle.speechWaiting, handlerInput);
+            callDirectiveService(bundle.speechWaiting, handlerInput);
         } catch (err) {
             // if it failed we can continue, just the user will wait longer for first response
             console.log(err);
@@ -86,7 +86,7 @@ const HorariosHandler = {
             'profesor': profesor,
         }
         try {
-            await callDirectiveService(bundle.speechWaiting, handlerInput);
+            callDirectiveService(bundle.speechWaiting, handlerInput);
         } catch (err) {
             // if it failed we can continue, just the user will wait longer for first response
             console.log(err);
